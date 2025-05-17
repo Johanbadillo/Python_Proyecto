@@ -22,5 +22,23 @@
         "cantidad": "1",
         "categoria": "comida",
         "descripcion": "hot dog"
+    },
+    {
+        "montoGasto": 100,
+        "cantidad": "99",
+        "categoria": "transporte",
+        "descripcion": "darien god"
+    },
+    {
+        "montoGasto": 600,
+        "cantidad": "5",
+        "categoria": "transporte",
+        "descripcion": "pipipi"
+    },
+    {
+        "montoGasto": 5265,
+        "cantidad": "2",
+        "categoria": "comida",
+        "descripcion": "super"
     }
 ]
