@@ -87,16 +87,44 @@ while(booleano):
             print(listaGastos)
         elif (confirmacion==2):
             categoria=int(input("1. Comida, 2. Transporte, 3. Entretenimiento, 4. Otros"))
-            
-            if (categoria=='1'):
-                
+            if (categoria==1):
                 for i in range(len(listaGastos)):
-                    
                     if( listaGastos[i]["categoria"] == "comida"):
-                        
                         listaComida = [listaGastos[i]]
+                        print(" ", listaComida)
+                else:
+                    print("No se encuentra gastos para la categoria de comida")
+            elif(categoria==2):
+                for i in range(len(listaGastos)):
+                    if( listaGastos[i]["categoria"] == "transporte"):
+                        listaTransporte = [listaGastos[i]]
+                        print(" ", listaTransporte)
+                else:
+                    print("No se encuentra gastos para la categoria de comida")
+            elif(categoria==3):
+                for i in range(len(listaGastos)):
+                    if( listaGastos[i]["categoria"] == "entretenimiento"):
+                        listaEntretenimiento = [listaGastos[i]]
+                        print(" ", listaEntretenimiento)
+                else:
+                    print("No se encuentra gastos para la categoria de entretenimiento")
+            elif(categoria==4):
+                for i in range(len(listaGastos)):
+                    if( listaGastos[i]["categoria"] == "otros"):
+                        listaOtros = [listaGastos[i]]
+                        print(" ", listaOtros)
+                else:
+                    print("No se encuentra gastos para la categoria de otros")
+            else:
+                print("No se encontro opcion valida \nRegresando al menu principal")
+        elif(confirmacion==3):
+            print("")
+                
+                        
+                    
 
-                        print("ejm", listaComida)
+
+                    
                         
 
                 
