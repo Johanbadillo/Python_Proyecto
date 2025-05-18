@@ -12,11 +12,12 @@
 #y las funciones para traer y llevar la base de los gastos
 from funciones import *
 from funcionesJson import *
-from  tabulate  import  tabulate 
-from time import time
+from  tabulate  import  *
+from datetime import *
 
 listaGastos=abrirJSON()
 booleano=True
+cabeza=["monto","cantidad","categoria","descripcion","fecha"]
 
 
 while(booleano):
@@ -47,17 +48,31 @@ while(booleano):
         unidades=str(input("- Cantidad: "))
         clase=str(input("- Categoria ( comida, transporte, entretenimientos, otros):  "))
         info=str(input("- Descripcion(opcional): "))
-        #Aqui hacemos un for para confirmar si deseas guardar el gasto
-        print(" ")
-        dicGastonuevo={
+        opcionHoractual=int(input("1. ¿Quieres que guardes la hora actual? o 2. ¿Quieres guardar la fecha manualmente?"))
+        if(opcionHoractual==1):
+            x= str(date.today().strftime("%Y-%m-%d"))
+            print("Fecha guardada con exito")
+            dicGastonuevo={
             "montoGasto":monto,
             "cantidad":unidades,
             "categoria":clase,
-            "descripcion":info
+            "descripcion":info,
+            "fecha":x
         }
+        if(opcionHoractual==2):
+            fechaIngreso=input("Ingrese la fecha actual (formato YYYY-MM-DD): ")
+            fecha = datetime.strptime(fechaIngreso, "%Y-%m-%d")
+            dicGastonuevo={
+            "montoGasto":monto,
+            "cantidad":unidades,
+            "categoria":clase,
+            "descripcion":info,
+            "fecha":fechaIngreso
+        }
+        #Aqui hacemos un for para confirmar si deseas guardar el gasto
+        print(" ")
         confirmacion=input("Introduzca " ' s '"para guardar o " ' c ' "para cancelar: ")
         print("=============================================")
-        
         if(confirmacion=='s'):
             listaGastos.append(dicGastonuevo)
             guardarJSON(listaGastos)
@@ -106,8 +121,22 @@ while(booleano):
             else:
                 print("=============================================\nNo se encontro opcion valida \nRegresando al menu principal")
         elif(confirmacion==3):
-            fechaInicio=int(input("Ingrese la fecha del inicio de busqueda"))
-            fechaFinal=(int(input("Ingrese la fecha del final de busqueda")))
+            campos=["fecha", "montoGasto", "categoria"]
+            listaFecharango=[]
+            fechaInicio=input("Ingrese la fecha inicial de la busqueda(formato YYYY-MM-DD): ")
+            fechaInicio = datetime.strptime(fechaInicio, "%Y-%m-%d").date()      
+            fechaFinal=input("Ingrese la fecha final de la busqueda (formato YYYY-MM-DD): ")
+            fechaFinal = datetime.strptime(fechaFinal, "%Y-%m-%d").date()
+            fcampos = ["fecha", "montoGasto", "categoria"]
+            for gasto in listaGastos:
+                fecha_gasto = datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
+                if fechaInicio <= fecha_gasto <= fechaFinal:
+                    gasto_filtrado = {k: gasto[k] for k in campos}
+                    listaFecharango.append(gasto_filtrado)
+            if listaFecharango:
+                print(tabulate(listaFecharango, headers="keys", tablefmt="pipe"))
+            else:
+                print("No hay gastos que cumplan con la condición.")
         elif(confirmacion==4):
             print("Regresando al menú principal")
         else:
@@ -123,14 +152,52 @@ while(booleano):
             \n3. Calcular total mensual\
             \n4. Regresar al menú principal\
             \n============================================= ")
-        opcionCalculo=int(input(""))
-        if(opcionCalculo==1):
-           print("")
-        if(opcionCalculo==2):
-            print("")
-        if(opcionCalculo==3):
-            print
-        if(opcionCalculo==4):
+        calculoOpcion=int(input(""))
+        if(calculoOpcion == 1 ):
+            fechaActual=datetime.today().date()
+            gastosDiario=[]
+            totalGastos=0
+            for i in range (len(listaGastos)):
+                fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
+                if (fechaGasto == fechaActual):
+                    gastosDiario.append(listaGastos[i])
+                    totalGastos +=listaGastos[i]["montoGasto"]
+            if gastosDiario:
+                print(tabulate(gastosDiario, headers="keys", tablefmt="pipe"))
+                print(f"\nTotal de gastos del día actual: {totalGastos}")
+            else:
+                print("No hay gastos registrados para el día de hoy. ")
+        elif(calculoOpcion==2):
+            fechaActual=datetime.today().date()
+            fechaSemanal=fechaActual-timedelta(days=7)
+            gastoSemanal=[]
+            totalGastos=0
+            for i in range (len(listaGastos)):
+                fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
+                if (fechaSemanal <= fechaGasto <= fechaActual):
+                    gastoSemanal.append(listaGastos[i])
+                    totalGastos +=listaGastos[i]["montoGasto"]
+            if gastoSemanal:
+                print(tabulate(gastoSemanal, headers="keys", tablefmt="pipe"))
+                print(f"\nTotal de gastos de la semana: {totalGastos}")
+            else:
+                print("No hay gastos registrados para la semana. ")
+        elif(calculoOpcion==3):
+            fechaActual=datetime.today().date()
+            fechaMensual=fechaActual-timedelta(days=30)
+            gastoMensual=[]
+            totalGastos=0
+            for i in range (len(listaGastos)):
+                fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
+                if (fechaMensual <= fechaGasto <= fechaActual):
+                    gastoMensual.append(listaGastos[i])
+                    totalGastos +=listaGastos[i]["montoGasto"]
+            if gastoMensual:
+                print(tabulate(gastoMensual, headers="keys", tablefmt="pipe"))
+                print(f"\nTotal de gastos Mensual: {totalGastos}")
+            else:
+                print("No hay gastos registrados para el mes. ")
+        elif(calculoOpcion==4):
             print("Regresando al menu principal")
         else:
             print("\nOpcion no valida\nRegresando al menu principal\n")
@@ -149,7 +216,7 @@ while(booleano):
         if(opcion==1):
             for i in range(len(listaGastos)):
                 print(tabulate(listaGastos, tablefmt="github"))
-        elif(opcion==2):
+        elif(opcion==2): 
             print("")
         elif(opcion==3):
             print("")
@@ -157,6 +224,12 @@ while(booleano):
             print("")
         else:
             print("\nOpcion no valida\nRegresando al menu principal\n")
+    elif(opcion==5):
+        print("Gracias por usar el sistema de gestión de gastos. ¡Hasta la próxima!")
+        booleano=False
+    else:
+        print("Opcion invalida ingrese una opcion valida")
+        
                                                      
         
 
