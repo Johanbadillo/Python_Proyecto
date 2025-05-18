@@ -18,6 +18,7 @@ from time import time
 listaGastos=abrirJSON()
 booleano=True
 
+
 while(booleano):
     listaGastos=abrirJSON()
     #En este punto se actualiza la lista de gastos cada vez que se hace un cambio
@@ -78,37 +79,30 @@ while(booleano):
         print("=============================================")
         
         if (confirmacion==1):
-            print(listaGastos)
+            print(tabulate(listaGastos, tablefmt="double_outline"))
         elif (confirmacion==2):
-            categoria=int(input("1. Comida\n2. Transporte\n3. Entretenimiento\n4. Otros"))
+            categoria=int(input("1. Comida\n2. Transporte\n3. Entretenimiento\n4. Otros\n"))
             if (categoria==1):
                 for i in range(len(listaGastos)):
                     if( listaGastos[i]["categoria"] == "comida"):
                         listaComida = [listaGastos[i]]
-                        print(" ", listaComida)
-                else:
-                    print("\nNo se encuentra gastos para la categoria de comida")
+                        print(tabulate(listaComida, tablefmt="double_outline"))
             elif(categoria==2):
                 for i in range(len(listaGastos)):
                     if( listaGastos[i]["categoria"] == "transporte"):
                         listaTransporte = [listaGastos[i]]
-                        print(" ", listaTransporte)
-                else:
-                    print("\nNo se encuentra gastos para la categoria de transporte")
+                        print(tabulate(listaTransporte, tablefmt="double_outline"))
             elif(categoria==3):
                 for i in range(len(listaGastos)):
                     if( listaGastos[i]["categoria"] == "entretenimiento"):
                         listaEntretenimiento = [listaGastos[i]]
-                        print(" ", listaEntretenimiento)
-                else:
-                    print("\nNo se encuentra gastos para la categoria de entretenimiento")
+                        print(tabulate(listaEntretenimiento, tablefmt="double_outline"))
             elif(categoria==4):
                 for i in range(len(listaGastos)):
                     if( listaGastos[i]["categoria"] == "otros"):
                         listaOtros = [listaGastos[i]]
-                        print(" ", listaOtros)
-                else:
-                    print("\nNo se encuentra gastos para la categoria de otros")
+                        print(tabulate(listaOtros, tablefmt="double_outline"))
+
             else:
                 print("=============================================\nNo se encontro opcion valida \nRegresando al menu principal")
         elif(confirmacion==3):
@@ -132,6 +126,39 @@ while(booleano):
         opcionCalculo=int(input(""))
         if(opcionCalculo==1):
            print("")
+        if(opcionCalculo==2):
+            print("")
+        if(opcionCalculo==3):
+            print
+        if(opcionCalculo==4):
+            print("Regresando al menu principal")
+        else:
+            print("\nOpcion no valida\nRegresando al menu principal\n")
+    if(opcion==4):
+        print("=============================================\
+              \n           Generar Reporte de Gastos\
+              \n=============================================\
+              \nSeleccione el tipo de reporte:\
+              \n\
+              \n1. Reporte diario\
+              \n2. Reporte semanal\
+              \n3. Reporte mensual\
+              \n4. Regresar al menú principal\
+              \n=============================================")
+        opcion=int(input(""))
+        if(opcion==1):
+            for i in range(len(listaGastos)):
+                print(tabulate(listaGastos, tablefmt="github"))
+        elif(opcion==2):
+            print("")
+        elif(opcion==3):
+            print("")
+        elif(opcion==4):
+            print("")
+        else:
+            print("\nOpcion no valida\nRegresando al menu principal\n")
+                                                     
+        
 
 
             
