@@ -82,41 +82,39 @@ while(booleano):
         if(opcion==1):
             x = str(date.today().strftime("%Y-%m-%d"))
             print("")
-            print("Reporte Gastos - Dia: " + x)
+            print("Reporte Gastos - Diario: " + x)
             totalDiario(listaGastos)
             print("\nCategorias:")
             (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesDiarios(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros, totales["tipo_reporte"])
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
         elif(opcion==2): 
             x = str(date.today().strftime("%Y-%m-%d"))
             print("")
-            print("Reporte Gastos - Dia: " + x)
+            print("Reporte Gastos - semanal: " + x)
             totalSemanal(listaGastos)
             print("\nCategorias:")
             (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesSemanales(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros, totales["tipo_reporte"])
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
         elif(opcion==3):
             x = str(date.today().strftime("%Y-%m-%d"))
             print("")
-            print("Reporte Gastos - Dia: " + x)
+            print("Reporte Gastos - mensual: " + x)
             totalMes(listaGastos)
             print("\nCategorias:")
-            temporal["tipoReporte"]="Reporte Mensual"
             (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesMensuales(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros, totales["tipo_reporte"])
-                guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
             else:
                 print("")
         elif(opcion==4):

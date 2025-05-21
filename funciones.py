@@ -290,7 +290,7 @@ def otros(i, totales, totalGastosOtros):
     return totalGastosOtros
 
 
-def guardarRepor(OpcionGuardado,tipoReporte ,totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros):
+def guardarRepor(OpcionGuardado,totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros):
     temporal={}
     if OpcionGuardado == 1:
         temporal = {
@@ -301,8 +301,7 @@ def guardarRepor(OpcionGuardado,tipoReporte ,totalGastosComida, totalGastosTrans
             "ropa": totalGastosRopa,  
             "tecnologia": totalGastosTecnologia, 
             "hogar": totalGastosHogar,  
-            "otros": totalGastosOtros,  
-            "TipoReporte":tipoReporte
+            "otros": totalGastosOtros
         }
     else:
         print("") 
