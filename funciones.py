@@ -131,10 +131,16 @@ def filtroCate(confirmacion,listaGastos):
 def calculos(calculoOpcion,listaGastos):
     if(calculoOpcion == 1 ):
         totalDiario(listaGastos)
+        print("")
+        totalesDiarios(listaGastos)
     elif(calculoOpcion==2):
         totalSemanal(listaGastos)
+        print("")
+        totalesSemanales(listaGastos)
     elif(calculoOpcion==3):
         totalMes(listaGastos)
+        print("")
+        totalesMensuales(listaGastos)
     elif(calculoOpcion==4):
         print("Regresando al menu principal")
     else:
@@ -150,7 +156,7 @@ def totalDiario(listaGastos):
             gastosDiario.append(listaGastos[i])
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastosDiario:
-        print(f"\nTotal Gastos: ${totalGastos}")
+        print(f"\nTotal de los gastos Diarios: ${totalGastos}")
 def totalSemanal(listaGastos):
     fechaActual=datetime.today().date()
     fechaSemanal=fechaActual-timedelta(days=7)
@@ -162,7 +168,7 @@ def totalSemanal(listaGastos):
             gastoSemanal.append(listaGastos[i])
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastoSemanal:
-        print(f"\nTotal de gastos de la semana: {totalGastos}")
+        print(f"\nTotal de los gastos Semanales: ${totalGastos}")
 def totalMes(listaGastos):
     fechaActual=datetime.today().date()
     fechaMensual=fechaActual-timedelta(days=30)
@@ -174,7 +180,7 @@ def totalMes(listaGastos):
             gastoMensual.append(listaGastos[i])
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastoMensual:
-        print(f"\nTotal de gastos Mensual: {totalGastos}")
+        print(f"\nTotal de los gastos Mensuales: ${totalGastos}")
 
 
 def totalesDiarios(listaGastos):
@@ -284,7 +290,7 @@ def otros(i, totales, totalGastosOtros):
     return totalGastosOtros
 
 
-def guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros):
+def guardarRepor(OpcionGuardado,tipoReporte ,totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros):
     temporal={}
     if OpcionGuardado == 1:
         temporal = {
@@ -295,10 +301,11 @@ def guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, total
             "ropa": totalGastosRopa,  
             "tecnologia": totalGastosTecnologia, 
             "hogar": totalGastosHogar,  
-            "otros": totalGastosOtros  
+            "otros": totalGastosOtros,  
+            "TipoReporte":tipoReporte
         }
     else:
-        print("a") # Default value to avoid errors in guardarlos
+        print("") 
     return temporal
 
 def guardarlos(logsJSON, guardarJSON, temporal, listaGastos):

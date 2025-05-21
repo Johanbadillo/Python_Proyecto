@@ -84,11 +84,11 @@ while(booleano):
             print("")
             print("Reporte Gastos - Dia: " + x)
             totalDiario(listaGastos)
-            print("\n\nCategorias:")
-            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesDiarios(listaGastos)  # Update global variables
+            print("\nCategorias:")
+            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesDiarios(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros, totales["tipo_reporte"])
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
@@ -97,11 +97,11 @@ while(booleano):
             print("")
             print("Reporte Gastos - Dia: " + x)
             totalSemanal(listaGastos)
-            print("\n\nCategorias:")
-            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesSemanales(listaGastos)  # Update global variables
+            print("\nCategorias:")
+            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesSemanales(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros, totales["tipo_reporte"])
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
@@ -110,11 +110,12 @@ while(booleano):
             print("")
             print("Reporte Gastos - Dia: " + x)
             totalMes(listaGastos)
-            print("\n\nCategorias:")
-            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesMensuales(listaGastos)  # Update global variables
+            print("\nCategorias:")
+            temporal["tipoReporte"]="Reporte Mensual"
+            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesMensuales(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros, totales["tipo_reporte"])
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
