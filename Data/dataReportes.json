@@ -1,0 +1,24 @@
+[
+    {
+        "tipo_reporte": "Diario",
+        "comida": 0,
+        "transporte": 0,
+        "entretenimiento": 0,
+        "salud": 0,
+        "ropa": 0,
+        "tecnologia": 0,
+        "hogar": 0,
+        "otros": 999
+    },
+    {
+        "tipo_reporte": "Diario",
+        "comida": 0,
+        "transporte": 0,
+        "entretenimiento": 0,
+        "salud": 1000,
+        "ropa": 0,
+        "tecnologia": 0,
+        "hogar": 0,
+        "otros": 999
+    }
+]

@@ -10,9 +10,9 @@
 #En este lado importamos(osea traemos)los otros archivos que necesitamos 
 #En este caso las funciones para el funcionamiento del programa 
 #y las funciones para traer y llevar la base de los gastos
-from funciones import *
-from funcionesJson import *
-from funcionesMensajes import *
+from Funciones.funciones import *
+from Funciones.funcionesJson import *
+from Funciones.funcionesMensajes import *
 from  tabulate  import  *
 from datetime import *
 # traemos hasta aqui la base de datos tipo json que estaremos usando a lo largo del codigo

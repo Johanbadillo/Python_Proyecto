@@ -222,5 +222,12 @@
         "categoria": "otros",
         "descripcion": "casino",
         "fecha": "2025-05-21"
+    },
+    {
+        "montoGasto": 1000,
+        "cantidad": 999,
+        "categoria": "salud",
+        "descripcion": "medicinas",
+        "fecha": "2025-05-21"
     }
 ]
