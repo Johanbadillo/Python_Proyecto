@@ -102,7 +102,6 @@ while(booleano):
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
                 temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
-                guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
         elif(opcion==3):
@@ -124,18 +123,4 @@ while(booleano):
     elif(opcion==5):
             print("Gracias por usar el sistema de gestión de gastos. ¡Hasta la próxima!")
             booleano=False
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 
