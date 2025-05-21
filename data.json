@@ -208,5 +208,12 @@
         "categoria": "otros",
         "descripcion": "rgwfd",
         "fecha": "2025-05-20"
+    },
+    {
+        "montoGasto": 1000,
+        "cantidad": "94529",
+        "categoria": "hogar",
+        "descripcion": "cccc",
+        "fecha": "2025-05-20"
     }
 ]

@@ -149,8 +149,8 @@ def totalDiario(listaGastos):
         if (fechaGasto == fechaActual):
             gastosDiario.append(listaGastos[i])
             totalGastos +=listaGastos[i]["montoGasto"]
-        if gastosDiario:
-            print(f"\nTotal Gastos: ${totalGastos}")
+    if gastosDiario:
+        print(f"\nTotal Gastos: ${totalGastos}")
 def totalSemanal(listaGastos):
     fechaActual=datetime.today().date()
     fechaSemanal=fechaActual-timedelta(days=7)
