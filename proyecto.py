@@ -21,6 +21,7 @@ booleano=True
 cabeza=["monto","cantidad","categoria","descripcion","fecha"]
 totalGastos=0
 totales={}
+temporal={}
 while(booleano):
     listaGastos=abrirJSON()
     #En este punto se actualiza la lista de gastos cada vez que se hace un cambio
@@ -79,35 +80,51 @@ while(booleano):
         mensaje4()
         opcion=int(input(""))
         if(opcion==1):
-            x= str(date.today().strftime("%Y-%m-%d"))
+            x = str(date.today().strftime("%Y-%m-%d"))
             print("")
-            print("Reporte Gastos - Dia: "+x)
+            print("Reporte Gastos - Dia: " + x)
             totalDiario(listaGastos)
             print("\n\nCategorias:")
-            totalesDiarios(listaGastos)
+            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesDiarios(listaGastos)  # Update global variables
+            OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
+            if (OpcionGuardado == 1):
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
+            else:
+                print("")
         elif(opcion==2): 
-            x= str(date.today().strftime("%Y-%m-%d"))
+            x = str(date.today().strftime("%Y-%m-%d"))
             print("")
-            print("Reporte Gastos - Dia: "+x)
+            print("Reporte Gastos - Dia: " + x)
             totalSemanal(listaGastos)
             print("\n\nCategorias:")
-            totalesSemanales(listaGastos)
+            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesSemanales(listaGastos)  # Update global variables
+            OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
+            if (OpcionGuardado == 1):
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
+            else:
+                print("")
         elif(opcion==3):
-            x= str(date.today().strftime("%Y-%m-%d"))
+            x = str(date.today().strftime("%Y-%m-%d"))
             print("")
-            print("Reporte Gastos - Dia: "+x)
+            print("Reporte Gastos - Dia: " + x)
             totalMes(listaGastos)
             print("\n\nCategorias:")
-            totalesMensuales(listaGastos)
+            (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesMensuales(listaGastos)  # Update global variables
+            OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
+            if (OpcionGuardado == 1):
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
+            else:
+                print("")
         elif(opcion==4):
-            print("")
+            print("Regresando al menu principal")
         else:
             print("\nOpcion no valida\nRegresando al menu principal\n")
     elif(opcion==5):
-        print("Gracias por usar el sistema de gestión de gastos. ¡Hasta la próxima!")
-        booleano=False
-    else:
-        print("Opcion incorrecta")
+            print("Gracias por usar el sistema de gestión de gastos. ¡Hasta la próxima!")
+            booleano=False
     
 
 

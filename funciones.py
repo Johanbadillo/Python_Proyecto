@@ -184,7 +184,7 @@ def totalesDiarios(listaGastos):
         fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
         if (fechaGasto == fechaActual):
             gastosReportes.append(listaGastos[i])
-    reportes(gastosReportes)
+    return reportes(gastosReportes)
 def totalesSemanales(listaGastos):
     fechaActual=datetime.today().date()
     fechaSemanal=fechaActual-timedelta(days=7)
@@ -193,7 +193,7 @@ def totalesSemanales(listaGastos):
         fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
         if (fechaSemanal <= fechaGasto <= fechaActual):
             gastosReportes.append(listaGastos[i])
-    reportes(gastosReportes)
+    return reportes(gastosReportes)
 def totalesMensuales(listaGastos):
     fechaActual=datetime.today().date()
     fechaMensual=fechaActual-timedelta(days=30)
@@ -202,40 +202,105 @@ def totalesMensuales(listaGastos):
         fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
         if (fechaMensual <= fechaGasto <= fechaActual):
             gastosReportes.append(listaGastos[i])
-    reportes(gastosReportes)
+    return reportes(gastosReportes)
 
 
 def reportes(gastosReportes):
-        totalGastosComida = 0
-        totalGastosTransporte = 0
-        totalGastosEntretenimiento = 0
-        totalGastosSalud = 0
-        totalGastosRopa = 0
-        totalGastosTecnologia = 0
-        totalGastosHogar = 0
-        totalGastosOtros = 0
-        for i in gastosReportes:
-            if(i["categoria"] == "comida"):
-                totalGastosComida +=i["montoGasto"]
-            if (i["categoria"] == "transporte"):
-                totalGastosTransporte +=i["montoGasto"]
-            if (i["categoria"] == "entretenimiento"):
-                totalGastosEntretenimiento +=i["montoGasto"]
-            if (i["categoria"] == "salud"):
-                totalGastosSalud +=i["montoGasto"]
-            if (i["categoria"] == "ropa"):
-                totalGastosRopa +=i["montoGasto"]
-            if (i["categoria"] == "tecnologia"):
-                totalGastosTecnologia +=i["montoGasto"]
-            if (i["categoria"] == "hogar"):
-                totalGastosHogar +=i["montoGasto"]
-            if (i["categoria"] == "otros"):
-                totalGastosOtros +=i["montoGasto"]
-        print(f"-Comida: ${totalGastosComida}\
-            \n-Transporte: ${totalGastosTransporte}\
-            \n-Entretenimiento: ${totalGastosEntretenimiento}\
-            \n-Salud: ${totalGastosSalud}\
-            \n-Ropa: ${totalGastosRopa}\
-            \n-Tecnologia: ${totalGastosTecnologia}\
-            \n-Hogar: ${totalGastosHogar}\
-            \n-Otros: ${totalGastosOtros}")
+    totalGastosComida = 0
+    totalGastosTransporte = 0
+    totalGastosEntretenimiento = 0
+    totalGastosSalud = 0
+    totalGastosRopa = 0
+    totalGastosTecnologia = 0
+    totalGastosHogar = 0
+    totalGastosOtros = 0
+    totales = {
+        "comida": 0,
+        "transporte": 0,
+        "entretenimiento": 0,
+        "salud": 0,
+        "ropa": 0,
+        "tecnologia": 0,
+        "hogar": 0,
+        "otros": 0
+    }
+    for i in gastosReportes:
+        totalGastosComida = comida(i, totales, totalGastosComida)
+        totalGastosTransporte = transporte(i, totales, totalGastosTransporte)
+        totalGastosEntretenimiento = entretenimiento(i, totales, totalGastosEntretenimiento)
+        totalGastosSalud = salud(i, totales, totalGastosSalud)
+        totalGastosRopa = ropa(i, totales, totalGastosRopa)
+        totalGastosTecnologia = tecnologia(i, totales, totalGastosTecnologia)
+        totalGastosHogar = hogar(i, totales, totalGastosHogar)
+        totalGastosOtros = otros(i, totales, totalGastosOtros)
+    print(f"-Comida: ${totalGastosComida}\
+        \n-Transporte: ${totalGastosTransporte}\
+        \n-Entretenimiento: ${totalGastosEntretenimiento}\
+        \n-Salud: ${totalGastosSalud}\
+        \n-Ropa: ${totalGastosRopa}\
+        \n-Tecnologia: ${totalGastosTecnologia}\
+        \n-Hogar: ${totalGastosHogar}\
+        \n-Otros: ${totalGastosOtros}")
+    return (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+def comida(i, totales, totalGastosComida):
+    if i["categoria"] == "comida":
+        totalGastosComida += i["montoGasto"]
+        totales["comida"] = totalGastosComida
+    return totalGastosComida
+def transporte(i, totales, totalGastosTransporte):
+    if i["categoria"] == "transporte":
+        totalGastosTransporte += i["montoGasto"]
+        totales["transporte"] = totalGastosTransporte
+    return totalGastosTransporte
+def entretenimiento(i, totales, totalGastosEntretenimiento):
+    if i["categoria"] == "entretenimiento":
+        totalGastosEntretenimiento += i["montoGasto"]
+        totales["entretenimiento"] = totalGastosEntretenimiento
+    return totalGastosEntretenimiento
+def salud(i, totales, totalGastosSalud):
+    if i["categoria"] == "salud":
+        totalGastosSalud += i["montoGasto"]
+        totales["salud"] = totalGastosSalud
+    return totalGastosSalud
+def ropa(i, totales, totalGastosRopa):
+    if i["categoria"] == "ropa":
+        totalGastosRopa += i["montoGasto"]
+        totales["ropa"] = totalGastosRopa
+    return totalGastosRopa
+def tecnologia(i, totales, totalGastosTecnologia):
+    if i["categoria"] == "tecnologia":
+        totalGastosTecnologia += i["montoGasto"]
+        totales["tecnologia"] = totalGastosTecnologia
+    return totalGastosTecnologia
+def hogar(i, totales, totalGastosHogar):
+    if i["categoria"] == "hogar":
+        totalGastosHogar += i["montoGasto"]
+        totales["hogar"] = totalGastosHogar
+    return totalGastosHogar
+def otros(i, totales, totalGastosOtros):
+    if i["categoria"] == "otros":
+        totalGastosOtros += i["montoGasto"]
+        totales["otros"] = totalGastosOtros
+    return totalGastosOtros
+
+
+def guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros):
+    temporal={}
+    if OpcionGuardado == 1:
+        temporal = {
+            "comida": totalGastosComida,  
+            "transporte": totalGastosTransporte, 
+            "entretenimiento": totalGastosEntretenimiento,  
+            "salud": totalGastosSalud,  
+            "ropa": totalGastosRopa,  
+            "tecnologia": totalGastosTecnologia, 
+            "hogar": totalGastosHogar,  
+            "otros": totalGastosOtros  
+        }
+    else:
+        print("a") # Default value to avoid errors in guardarlos
+    return temporal
+
+def guardarlos(logsJSON, guardarJSON, temporal, listaGastos):
+        logsJSON(temporal)
+        guardarJSON(listaGastos)

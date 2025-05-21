@@ -14,7 +14,7 @@ def mensajeIni():
 
 def mensaje1():
     print("=============================================\
-            \n            Registrar Nuevo Gasto\
+        \n            Registrar Nuevo Gasto\
         \n=============================================\
         \nIngrese la informacion del gasto:\
         \n")

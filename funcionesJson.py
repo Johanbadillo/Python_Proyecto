@@ -12,6 +12,14 @@ def guardarJSON(dic):
 
 def cargarLogs():
     dic=[]
-    with open("./data/logs.json",'r') as openFile:
+    with open("./dataReportes.json",'r') as openFile:
         dic=json.load(openFile)
     return dic
+
+def logsJSON(dic):
+    dicTemporal = []
+    
+    dicTemporal=cargarLogs()
+    dicTemporal.append(dic)
+    with open("./dataReportes.json",'w') as outFile:
+        json.dump(dicTemporal,outFile)
