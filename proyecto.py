@@ -12,6 +12,7 @@
 #y las funciones para traer y llevar la base de los gastos
 from funciones import *
 from funcionesJson import *
+from funcionesMensajes import *
 from  tabulate  import  *
 from datetime import *
 
@@ -19,7 +20,7 @@ listaGastos=abrirJSON()
 booleano=True
 cabeza=["monto","cantidad","categoria","descripcion","fecha"]
 totalGastos=0
-
+totales={}
 while(booleano):
     listaGastos=abrirJSON()
     #En este punto se actualiza la lista de gastos cada vez que se hace un cambio
@@ -85,9 +86,19 @@ while(booleano):
             print("\n\nCategorias:")
             totalesDiarios(listaGastos)
         elif(opcion==2): 
+            x= str(date.today().strftime("%Y-%m-%d"))
             print("")
+            print("Reporte Gastos - Dia: "+x)
+            totalSemanal(listaGastos)
+            print("\n\nCategorias:")
+            totalesSemanales(listaGastos)
         elif(opcion==3):
+            x= str(date.today().strftime("%Y-%m-%d"))
             print("")
+            print("Reporte Gastos - Dia: "+x)
+            totalMes(listaGastos)
+            print("\n\nCategorias:")
+            totalesMensuales(listaGastos)
         elif(opcion==4):
             print("")
         else:

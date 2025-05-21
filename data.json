@@ -203,14 +203,7 @@
         "fecha": "2025-05-19"
     },
     {
-        "montoGasto": 1000,
-        "cantidad": "5",
-        "categoria": "hogar",
-        "descripcion": "fsads",
-        "fecha": "2025-05-20"
-    },
-    {
-        "montoGasto": 54425725,
+        "montoGasto": 1,
         "cantidad": "999",
         "categoria": "otros",
         "descripcion": "rgwfd",

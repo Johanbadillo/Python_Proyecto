@@ -1,51 +1,9 @@
 from datetime import *
 from tabulate import *
-totalGastosComida=0
-totalGastosTransporte=0
-totalGastosEntretenimiento=0
-totalGastosSalud=0
-totalGastosRopa=0
-totalGastosTecnologia=0
-totalGastosHogar=0
-totalGastosOtros=0
 
 
-
-def mensaje1():
-    print("=============================================\
-            \n            Registrar Nuevo Gasto\
-        \n=============================================\
-        \nIngrese la informacion del gasto:\
-        \n")
-
-def mensajeIni():
-    print("=============================================\
-    \n         Simulador de Gasto Diario\
-    \n=============================================\
-    \nSeleccione una opción:\
-    \n\
-    \n1. Registrar nuevo gasto\
-    \n2. Enumere los gastos\
-    \n3. Calcular total de gastos\
-    \n4. Generar reporte de gastos\
-    \n5. Salir\
-    \n=============================================")
-
-def mensaje2():
-    print("=============================================\
-            \n                Listar Gastos\
-            \n=============================================\
-            \nSeleccione una opción para filtrar los gastos:\
-            \n""\
-            \n1. Ver todos los gastos\
-            \n2. Filtrar por categoria\
-            \n3. Filtrar por rango de fechas\
-            \n4. Regresar al menú principal\
-            \n=============================================")
-    
 def filtroCate(confirmacion,listaGastos):
     print("=============================================")
-        
     if (confirmacion==1):
         print(tabulate(listaGastos, tablefmt="double_outline"))
     elif (confirmacion==2):
@@ -168,17 +126,8 @@ def filtroCate(confirmacion,listaGastos):
         print("Regresando al menú principal.........")
     else:
         print("\nOpcion no valida\nRegresando al menu principal.......\n")
-def mensaje3():
-    print("=============================================\
-            \n          Calcular Total de Gastos\
-            \n=============================================\
-            \nSeleccione el periodo de cálculo:\
-            \n\
-            \n1. Calcular total diario\
-            \n2. Calcular total semanal\
-            \n3. Calcular total mensual\
-            \n4. Regresar al menú principal\
-            \n============================================= ")
+
+
 def calculos(calculoOpcion,listaGastos):
     if(calculoOpcion == 1 ):
         totalDiario(listaGastos)
@@ -200,12 +149,8 @@ def totalDiario(listaGastos):
         if (fechaGasto == fechaActual):
             gastosDiario.append(listaGastos[i])
             totalGastos +=listaGastos[i]["montoGasto"]
-    if gastosDiario:
-            gastoDiario(totalGastos)
-    else:
-        print("No hay gastos registrados para el día de hoy. ")
-
-
+        if gastosDiario:
+            print(f"\nTotal Gastos: ${totalGastos}")
 def totalSemanal(listaGastos):
     fechaActual=datetime.today().date()
     fechaSemanal=fechaActual-timedelta(days=7)
@@ -217,11 +162,7 @@ def totalSemanal(listaGastos):
             gastoSemanal.append(listaGastos[i])
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastoSemanal:
-        
         print(f"\nTotal de gastos de la semana: {totalGastos}")
-    else:
-        print("No hay gastos registrados para la semana. ")
-
 def totalMes(listaGastos):
     fechaActual=datetime.today().date()
     fechaMensual=fechaActual-timedelta(days=30)
@@ -234,91 +175,67 @@ def totalMes(listaGastos):
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastoMensual:
         print(f"\nTotal de gastos Mensual: {totalGastos}")
-    else:
-        print("No hay gastos registrados para el mes. ")
-def gastoDiario(totalGastos):
-    print(f"\nTotal Gastos: ${totalGastos}")
 
-def mensaje4():
-    print("=============================================\
-            \n           Generar Reporte de Gastos\
-            \n=============================================\
-            \nSeleccione el tipo de reporte:\
-            \n\
-            \n1. Reporte diario\
-            \n2. Reporte semanal\
-            \n3. Reporte mensual\
-            \n4. Regresar al menú principal\
-            \n=============================================")
 
 def totalesDiarios(listaGastos):
     fechaActual=datetime.today().date()
-    gastosDiario=[]
-    
-
+    gastosReportes=[]
     for i in range (len(listaGastos)):
         fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
         if (fechaGasto == fechaActual):
-            gastosDiario.append(listaGastos[i])
-            reportes(listaGastos,i)
-    
+            gastosReportes.append(listaGastos[i])
+    reportes(gastosReportes)
+def totalesSemanales(listaGastos):
+    fechaActual=datetime.today().date()
+    fechaSemanal=fechaActual-timedelta(days=7)
+    gastosReportes=[]
+    for i in range (len(listaGastos)):
+        fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
+        if (fechaSemanal <= fechaGasto <= fechaActual):
+            gastosReportes.append(listaGastos[i])
+    reportes(gastosReportes)
+def totalesMensuales(listaGastos):
+    fechaActual=datetime.today().date()
+    fechaMensual=fechaActual-timedelta(days=30)
+    gastosReportes=[]
+    for i in range (len(listaGastos)):
+        fechaGasto=datetime.strptime(listaGastos[i]["fecha"], "%Y-%m-%d").date()
+        if (fechaMensual <= fechaGasto <= fechaActual):
+            gastosReportes.append(listaGastos[i])
+    reportes(gastosReportes)
 
-def reportes(listaGastos,i):
 
-    listaOtros=[]
-    listaHogar=[]
-    listasTecnologia=[]
-    listaRopa=[]
-    listaSalud=[]
-    listaEntretenimiento=[]
-    listaTransporte=[]
-    listaComida=[]
-    campos=[]
-    if(listaGastos[i]["categoria"] == "comida"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listaComida.append(gasto_filtrado)
-        totalGastosComida +=listaGastos[i]["montoGasto"]
-    if (listaGastos[i]["categoria"] == "transporte"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listaTransporte.append(gasto_filtrado)
-        totalGastosTransporte +=listaGastos[i]["montoGasto"]
-    if (listaGastos[i]["categoria"] == "entretenimiento"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listaEntretenimiento.append(gasto_filtrado)
-        totalGastosEntretenimiento +=listaGastos[i]["montoGasto"]
-    if (listaGastos[i]["categoria"] == "salud"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listaSalud.append(gasto_filtrado)
-        totalGastosSalud +=listaGastos[i]["montoGasto"]
-    if (listaGastos[i]["categoria"] == "ropa"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listaRopa.append(gasto_filtrado)
-        totalGastosRopa +=listaGastos[i]["montoGasto"]
-    if (listaGastos[i]["categoria"] == "tecnologia"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listasTecnologia.append(gasto_filtrado)
-        totalGastosTecnologia +=listaGastos[i]["montoGasto"]
-    if (listaGastos[i]["categoria"] == "hogar"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listaHogar.append(gasto_filtrado)
-        totalGastosHogar +=listaGastos[i]["montoGasto"]
-    if (listaGastos[i]["categoria"] == "otros"):
-        gasto = listaGastos[i]
-        gasto_filtrado = {k: gasto[k] for k in campos}
-        listaOtros.append(gasto_filtrado)
-        totalGastosOtros +=listaGastos[i]["montoGasto"]
-print(f"-Comida: ${totalGastosComida}\
-    \n-Transporte: ${totalGastosTransporte}\
-    \n-Entretenimiento: ${totalGastosComida}\
-    \n-Salud: ${totalGastosSalud}\
-    \n-Ropa: ${totalGastosRopa}\
-    \n-Tecnologia: ${totalGastosTecnologia}\
-    \n-Hogar: ${totalGastosHogar}\
-    \n-Otros: ${totalGastosOtros}")
+def reportes(gastosReportes):
+        totalGastosComida = 0
+        totalGastosTransporte = 0
+        totalGastosEntretenimiento = 0
+        totalGastosSalud = 0
+        totalGastosRopa = 0
+        totalGastosTecnologia = 0
+        totalGastosHogar = 0
+        totalGastosOtros = 0
+        for i in gastosReportes:
+            if(i["categoria"] == "comida"):
+                totalGastosComida +=i["montoGasto"]
+            if (i["categoria"] == "transporte"):
+                totalGastosTransporte +=i["montoGasto"]
+            if (i["categoria"] == "entretenimiento"):
+                totalGastosEntretenimiento +=i["montoGasto"]
+            if (i["categoria"] == "salud"):
+                totalGastosSalud +=i["montoGasto"]
+            if (i["categoria"] == "ropa"):
+                totalGastosRopa +=i["montoGasto"]
+            if (i["categoria"] == "tecnologia"):
+                totalGastosTecnologia +=i["montoGasto"]
+            if (i["categoria"] == "hogar"):
+                totalGastosHogar +=i["montoGasto"]
+            if (i["categoria"] == "otros"):
+                totalGastosOtros +=i["montoGasto"]
+        print(f"-Comida: ${totalGastosComida}\
+            \n-Transporte: ${totalGastosTransporte}\
+            \n-Entretenimiento: ${totalGastosEntretenimiento}\
+            \n-Salud: ${totalGastosSalud}\
+            \n-Ropa: ${totalGastosRopa}\
+            \n-Tecnologia: ${totalGastosTecnologia}\
+            \n-Hogar: ${totalGastosHogar}\
+            \n-Otros: ${totalGastosOtros}")
