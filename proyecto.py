@@ -35,6 +35,7 @@ while(booleano):
         clase=str(input("Categorias:\n\nComida\nTransporte\nEntretenimiento\nSalud\nRopa\nTecnologia\nHogar\nOtros\n=============================================\n"))
         clase=clase.lower()
         info=str(input("- Descripcion(opcional): "))
+        #aqui le preguntamos si quiere que la fecha se guarde de manea local con la hora de la pc o que el mismo usuario introduzca la hora qu deseas guardar el gastos
         opcionHoractual=int(input("1. ¿Quieres que guardes la hora actual? o 2. ¿Quieres guardar la fecha manualmente?"))
         if(opcionHoractual==1):
             x= str(date.today().strftime("%Y-%m-%d"))
@@ -67,18 +68,29 @@ while(booleano):
             print("Gasto nuevo guardado")
         else:
             print("Gasto no ingresado")
+#Opcion numero2 aqui enumeramos gastos
     if(opcion==2):
+        #y aqui traemos el mensaje que se encuentra en funciones mensajes
         mensaje2()
         confirmacion=int(input(""))
         filtroCate(confirmacion,listaGastos)
+#Opcion numero3 aqui calculamos los totales de los gastos
     if(opcion==3):
+        #y aqui traemos el mensaje que se encuentra en funciones mensajes
         mensaje3()
         calculoOpcion=int(input(""))
         calculos(calculoOpcion,listaGastos)
+#Opcion numero4 aqui generamos los reportes
     if(opcion==4):
+        #y aqui traemos el mensaje que se encuentra en funciones mensajes
         mensaje4()
         opcion=int(input(""))
         if(opcion==1):
+            """
+            aqui vamos a generar los reportes diarios primero dividiendo por rangos de tiempo los diarios solo van a tomar los valores del dia de hoy
+            luego de filtra la lista por el rango del tiempo se va sacando los totales por cada categoria y se guarda en un archivo json
+            """
+            #aqui son los diarios
             x = str(date.today().strftime("%Y-%m-%d"))
             print("")
             print("Reporte Gastos - Diario: " + x)
@@ -91,6 +103,7 @@ while(booleano):
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
+        #aqui son los semanales
         elif(opcion==2): 
             x = str(date.today().strftime("%Y-%m-%d"))
             print("")
@@ -104,6 +117,7 @@ while(booleano):
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
+        #aqui son los mensuales
         elif(opcion==3):
             x = str(date.today().strftime("%Y-%m-%d"))
             print("")
@@ -117,6 +131,7 @@ while(booleano):
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
+        #aqui se da la opcion de mostrar los reportes anteriores guardados
         elif(opcion==4):
             Reportes=cargarLogs()
             print(tabulate(Reportes, headers="keys", tablefmt="pipe"))
@@ -125,6 +140,8 @@ while(booleano):
         else:
             print("\nOpcion no valida\nRegresando al menu principal\n")
     elif(opcion==5):
+            #aqui finalizamos las repeticiones de la lista de while 
+            #haciendo que booleano sea falso y asi rompiendo las repeticiones
             print("Gracias por usar el sistema de gestión de gastos. ¡Hasta la próxima!")
             booleano=False
 

@@ -1,7 +1,12 @@
+"""
+aqui vamos a declarar las funciones que vamos a usar a lo largo del archivo proyecto hacindo que haga procesos repetitivos 
+importando tambien las libreria de tiempo y tabular 
+"""
+
 from datetime import *
 from tabulate import *
 
-
+#En esta opcion vamos a estar filtrando los totales por categoria una por una comparandolas
 def filtroCate(confirmacion,listaGastos):
     print("=============================================")
     if (confirmacion==1):
@@ -127,7 +132,7 @@ def filtroCate(confirmacion,listaGastos):
     else:
         print("\nOpcion no valida\nRegresando al menu principal.......\n")
 
-
+#aqui definimos la funcion de calculo que en cada opcion esta definida en otro lugar
 def calculos(calculoOpcion,listaGastos):
     if(calculoOpcion == 1 ):
         totalDiario(listaGastos)
@@ -145,7 +150,8 @@ def calculos(calculoOpcion,listaGastos):
         print("Regresando al menu principal")
     else:
         print("\nOpcion no valida\nRegresando al menu principal\n")
-
+#aqui esta la funcion de los totales dependiendo por el rango de tiempo
+#en esta primera opcion es diaria
 def totalDiario(listaGastos):
     fechaActual=datetime.today().date()
     gastosDiario=[]
@@ -159,6 +165,7 @@ def totalDiario(listaGastos):
         print(f"\nTotal de los gastos Diarios: ${totalGastos}")
     else:
         print(f"\nTotal de los gastos Diarios: ${totalGastos}")
+#aqui es por semanas
 def totalSemanal(listaGastos):
     fechaActual=datetime.today().date()
     fechaSemanal=fechaActual-timedelta(days=7)
@@ -173,6 +180,7 @@ def totalSemanal(listaGastos):
         print(f"\nTotal de los gastos Semanales: ${totalGastos}")
     else:
         print(f"\nTotal de los gastos Semanales: ${totalGastos}")
+        #aqui es por meses
 def totalMes(listaGastos):
     fechaActual=datetime.today().date()
     fechaMensual=fechaActual-timedelta(days=30)
@@ -187,7 +195,12 @@ def totalMes(listaGastos):
         print(f"\nTotal de los gastos Mensuales: ${totalGastos}")
     else:
         print(f"\nTotal de los gastos Mensuales: ${totalGastos}")
-
+"""
+Aqui lo que vamos a definir son los totales de cada categoria pero los datos ingresados seran filtrados por la funciones que vienen
+que puede ser diaria,semanales o mensuales 
+donde saca el total para cada categoria y regresando el valor para cada una
+"""
+#aqui es cuando son diarios
 def totalesDiarios(listaGastos):
     fechaActual=datetime.today().date()
     gastosReportes=[]
@@ -196,6 +209,7 @@ def totalesDiarios(listaGastos):
         if (fechaGasto == fechaActual):
             gastosReportes.append(listaGastos[i])
     return reportes(gastosReportes)
+#aqui son las semanales
 def totalesSemanales(listaGastos):
     fechaActual=datetime.today().date()
     fechaSemanal=fechaActual-timedelta(days=7)
@@ -205,6 +219,7 @@ def totalesSemanales(listaGastos):
         if (fechaSemanal <= fechaGasto <= fechaActual):
             gastosReportes.append(listaGastos[i])
     return reportes(gastosReportes)
+#aqui son las mensuals
 def totalesMensuales(listaGastos):
     fechaActual=datetime.today().date()
     fechaMensual=fechaActual-timedelta(days=30)
@@ -215,7 +230,10 @@ def totalesMensuales(listaGastos):
             gastosReportes.append(listaGastos[i])
     return reportes(gastosReportes)
 
-
+"""
+Aqui vamos a sacar los totales difiniendo las variables y haiendo regresar los valores para cada categoria
+y haciendolas añadir a una lista 
+"""
 def reportes(gastosReportes):
     totalGastosComida = 0
     totalGastosTransporte = 0
@@ -253,6 +271,7 @@ def reportes(gastosReportes):
         \n-Hogar: ${totalGastosHogar}\
         \n-Otros: ${totalGastosOtros}")
     return (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+#aqui hacemos funciones donde muestra el total de cada categoria
 def comida(i, totales, totalGastosComida):
     if i["categoria"] == "comida":
         totalGastosComida += i["montoGasto"]
@@ -294,7 +313,7 @@ def otros(i, totales, totalGastosOtros):
         totales["otros"] = totalGastosOtros
     return totalGastosOtros
 
-
+#aqui guardamos los totales a cada tipo de categoria y regresando la lista
 def guardarRepor(OpcionGuardado,totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros,tipo_reporte):
     temporal={}
     if OpcionGuardado == 1:
@@ -312,7 +331,7 @@ def guardarRepor(OpcionGuardado,totalGastosComida, totalGastosTransporte, totalG
     else:
         print("") 
     return temporal
-
+#aqui guardamos la lista
 def guardarlos(logsJSON, guardarJSON, temporal, listaGastos):
         logsJSON(temporal)
         guardarJSON(listaGastos)

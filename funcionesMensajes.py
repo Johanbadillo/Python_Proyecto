@@ -1,3 +1,11 @@
+
+"""
+Aqui en este archivo vamos a solo definir las funciones de mensajes para tener una mejor organizacion 
+"""
+
+
+
+
 def mensajeIni():
     print("=============================================\
     \n         Simulador de Gasto Diario\
