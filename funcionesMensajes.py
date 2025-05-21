@@ -19,6 +19,7 @@ def mensaje1():
         \nIngrese la informacion del gasto:\
         \n")
 
+
 def mensaje2():
     print("=============================================\
             \n                Listar Gastos\
@@ -30,6 +31,7 @@ def mensaje2():
             \n3. Filtrar por rango de fechas\
             \n4. Regresar al menú principal\
             \n=============================================")
+
 
 def mensaje3():
     print("=============================================\
@@ -43,6 +45,7 @@ def mensaje3():
             \n4. Regresar al menú principal\
             \n============================================= ")
 
+
 def mensaje4():
     print("=============================================\
             \n           Generar Reporte de Gastos\
@@ -52,6 +55,7 @@ def mensaje4():
             \n1. Reporte diario\
             \n2. Reporte semanal\
             \n3. Reporte mensual\
+            \n4. Ver Reportes\
             \n4. Regresar al menú principal\
             \n=============================================")
 

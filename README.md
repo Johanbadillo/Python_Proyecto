@@ -25,3 +25,4 @@ git clone https://github.com/Johanbadillo/Python_Proyecto
 <p align="center"><strong>Haga click aqui un video explicativo sobre el codigo</strong> 
 
 <p align="center">¡Disfruta de nuestro programa de simulador de gastos!</p>
+ 

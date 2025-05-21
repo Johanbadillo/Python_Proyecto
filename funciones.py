@@ -9,7 +9,7 @@ def filtroCate(confirmacion,listaGastos):
     elif (confirmacion==2):
         categoria=int(input("1. Comida\n2. Transporte\n3. Entretenimiento\n4. Salud\n5. Ropa\n6. Tecnologia\n7. Hogar\n8. Otros\n=============================================\n"))
         if categoria == 1:
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaComida = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "comida":
@@ -21,7 +21,7 @@ def filtroCate(confirmacion,listaGastos):
             else:
                 print("No hay gastos registrados para la clase de comida")
         elif(categoria==2):
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaTransporte = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "transporte":
@@ -33,7 +33,7 @@ def filtroCate(confirmacion,listaGastos):
             else:
                 print("No hay gastos registrados para la clase de transporte")
         elif(categoria==3):
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaEntretenimiento = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "entretenimiento":
@@ -45,7 +45,7 @@ def filtroCate(confirmacion,listaGastos):
             else:
                 print("No hay gastos registrados para la clase de entretenimiento")
         elif(categoria==4):
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaSalud = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "salud":
@@ -57,7 +57,7 @@ def filtroCate(confirmacion,listaGastos):
             else:
                 print("No hay gastos registrados para la clase de salud")
         elif(categoria==5):
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaRopa = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "ropa":
@@ -69,7 +69,7 @@ def filtroCate(confirmacion,listaGastos):
             else:
                 print("No hay gastos registrados para la clase de ropa")
         elif(categoria==6):
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaTecnología = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "tecnología":
@@ -81,7 +81,7 @@ def filtroCate(confirmacion,listaGastos):
             else:
                 print("No hay gastos registrados para la clase de tecnología")
         elif(categoria==7):
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaHogar = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "hogar":
@@ -93,7 +93,7 @@ def filtroCate(confirmacion,listaGastos):
             else:
                 print("No hay gastos registrados para la clase de hogar")
         elif(categoria==8):
-            campos = ["fecha", "montoGasto", "categoria","cantidad"]
+            campos = ["fecha", "montoGasto", "categoria","cantidad","descripcion"]
             listaOtros = []
             for i in range(len(listaGastos)):
                 if listaGastos[i]["categoria"] == "otros":
@@ -119,7 +119,7 @@ def filtroCate(confirmacion,listaGastos):
                 gasto_filtrado = {k: gasto[k] for k in campos}
                 listaFecharango.append(gasto_filtrado)
         if listaFecharango:
-            print(tabulate(listaFecharango, headers="keys", tablefmt="pipe"))
+            print(tabulate(listaFecharango, tablefmt="heavy_outline"))
         else:
             print("No hay gastos que cumplan con la condición.")
     elif(confirmacion==4):
@@ -157,6 +157,8 @@ def totalDiario(listaGastos):
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastosDiario:
         print(f"\nTotal de los gastos Diarios: ${totalGastos}")
+    else:
+        print(f"\nTotal de los gastos Diarios: ${totalGastos}")
 def totalSemanal(listaGastos):
     fechaActual=datetime.today().date()
     fechaSemanal=fechaActual-timedelta(days=7)
@@ -168,6 +170,8 @@ def totalSemanal(listaGastos):
             gastoSemanal.append(listaGastos[i])
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastoSemanal:
+        print(f"\nTotal de los gastos Semanales: ${totalGastos}")
+    else:
         print(f"\nTotal de los gastos Semanales: ${totalGastos}")
 def totalMes(listaGastos):
     fechaActual=datetime.today().date()
@@ -181,7 +185,8 @@ def totalMes(listaGastos):
             totalGastos +=listaGastos[i]["montoGasto"]
     if gastoMensual:
         print(f"\nTotal de los gastos Mensuales: ${totalGastos}")
-
+    else:
+        print(f"\nTotal de los gastos Mensuales: ${totalGastos}")
 
 def totalesDiarios(listaGastos):
     fechaActual=datetime.today().date()
@@ -290,10 +295,11 @@ def otros(i, totales, totalGastosOtros):
     return totalGastosOtros
 
 
-def guardarRepor(OpcionGuardado,totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros):
+def guardarRepor(OpcionGuardado,totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros,tipo_reporte):
     temporal={}
     if OpcionGuardado == 1:
         temporal = {
+            "tipo_reporte":tipo_reporte,
             "comida": totalGastosComida,  
             "transporte": totalGastosTransporte, 
             "entretenimiento": totalGastosEntretenimiento,  

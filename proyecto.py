@@ -3,9 +3,9 @@
 # ################################### 
 
 #Debemos crear un programa donde nos ayude a llevar nuestros gastos diarios 
-#Donde se puedan monitorear,modificar,mostrary eliminar
+#Donde se puedan monitorear,filtrar por categorias,calcular los totales por rango de periodo 
 #Filtrandolo por periodos de tiempo
-
+#Generar reportes y guardarlos en un archivo json
 
 #En este lado importamos(osea traemos)los otros archivos que necesitamos 
 #En este caso las funciones para el funcionamiento del programa 
@@ -15,26 +15,25 @@ from funcionesJson import *
 from funcionesMensajes import *
 from  tabulate  import  *
 from datetime import *
-
+# traemos hasta aqui la base de datos tipo json que estaremos usando a lo largo del codigo
 listaGastos=abrirJSON()
+#aqui hacemos qu el ciclo while  se repita infinitamente hasta que no se cambie el valor a booleano
 booleano=True
-cabeza=["monto","cantidad","categoria","descripcion","fecha"]
-totalGastos=0
-totales={}
-temporal={}
 while(booleano):
     listaGastos=abrirJSON()
     #En este punto se actualiza la lista de gastos cada vez que se hace un cambio
-    #CRUD (CREATE , READ , UPDATE & DELETE)
     mensajeIni()
+    #importamos el mensaje inicial 
     opcion=int(input(""))
     #Aqui es donde empezamos a saltar a las opciones que el usuario desea usar 
     #Opcion numero 1 es donde uno debe registrar los datos de los gastos nuevos
     if(opcion==1):
         mensaje1()
+        #le pedimos los datos que desea agg el usuario 
         monto=int(input("- Monto del gasto:  "))
-        unidades=str(input("- Cantidad: "))
-        clase=str(input("- Categoria ( comida, transporte, entretenimientos, otros):  "))
+        unidades=int(input("- Cantidad: "))
+        clase=str(input("Categorias:\n\nComida\nTransporte\nEntretenimiento\nSalud\nRopa\nTecnologia\nHogar\nOtros\n=============================================\n"))
+        clase=clase.lower()
         info=str(input("- Descripcion(opcional): "))
         opcionHoractual=int(input("1. ¿Quieres que guardes la hora actual? o 2. ¿Quieres guardar la fecha manualmente?"))
         if(opcionHoractual==1):
@@ -88,7 +87,7 @@ while(booleano):
             (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesDiarios(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros,"Diario")
                 guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
@@ -101,7 +100,8 @@ while(booleano):
             (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesSemanales(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros,"Semanal")
+                guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
         elif(opcion==3):
@@ -113,10 +113,14 @@ while(booleano):
             (totalGastosComida, totales, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros) = totalesMensuales(listaGastos)
             OpcionGuardado = int(input("¿Quieres guardar este registro?\n1. Si\n2. No\n"))
             if (OpcionGuardado == 1):
-                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros)
+                temporal = guardarRepor(OpcionGuardado, totalGastosComida, totalGastosTransporte, totalGastosEntretenimiento, totalGastosSalud, totalGastosRopa, totalGastosTecnologia, totalGastosHogar, totalGastosOtros,"Mensual")
+                guardarlos(logsJSON, guardarJSON, temporal, listaGastos)
             else:
                 print("")
         elif(opcion==4):
+            Reportes=cargarLogs()
+            print(tabulate(Reportes, headers="keys", tablefmt="pipe"))
+        elif(opcion==5):
             print("Regresando al menu principal")
         else:
             print("\nOpcion no valida\nRegresando al menu principal\n")
