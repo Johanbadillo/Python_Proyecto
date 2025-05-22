@@ -14,12 +14,12 @@
 
 ## Instalación
 
-```bash
 <p>Pero para la ejecución de este programa vamos a necesitar que descarguen con anterioridad el diccionario de la tabulación que para eso usaremos este comando</p> 
-bash
+```bash
 pip install tabulate
+```
 <p>Continuaremos con la instalación del programa</p>
-bash
+```bash
 git clone https://github.com/Johanbadillo/Python_Proyecto
 ```
 
