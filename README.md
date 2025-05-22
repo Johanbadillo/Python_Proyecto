@@ -30,5 +30,5 @@ git clone https://github.com/Johanbadillo/Python_Proyecto
 <p align="center"><strong><a href="https://youtu.be/cRWHBtwMylU?feature=shared">Haga click aqui un video explicativo sobre el funcionamiento del codigo</a></strong> 
 
 <p align="center">¡Disfruta de nuestro programa de simulador de gastos!</p>
- 
+
  

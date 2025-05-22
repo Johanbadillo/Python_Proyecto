@@ -1,7 +1,7 @@
 # ###################################
 # ##########Python-Proyecto##########
 # ################################### 
-
+#
 #Debemos crear un programa donde nos ayude a llevar nuestros gastos diarios 
 #Donde se puedan monitorear,filtrar por categorias,calcular los totales por rango de periodo 
 #Filtrandolo por periodos de tiempo
