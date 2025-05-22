@@ -15,6 +15,11 @@
 ## Instalación
 
 ```bash
+<p>Pero para la ejecución de este programa vamos a necesitar que descarguen con anterioridad el diccionario de la tabulación que para eso usaremos este comando</p> 
+bash
+pip install tabulate
+<p>Continuaremos con la instalación del programa</p>
+bash
 git clone https://github.com/Johanbadillo/Python_Proyecto
 ```
 
@@ -22,7 +27,8 @@ git clone https://github.com/Johanbadillo/Python_Proyecto
 - 
 <p align="left"> El Simulador de Gastos Diarios es un programa en Python que permite a los usuarios gestionar sus gastos de forma práctica y accesible. Facilita el registro, visualización, filtrado y cálculo de gastos diarios, semanales o mensuales, organizados por categorías como comida, transporte, entre otras. Los datos se almacenan en un archivo JSON para garantizar su persistencia, y el programa genera reportes detallados en formato de texto con la opción de guardarlos. Diseñado para usuarios que buscan una herramienta sencilla sin complejidades, ofrece una interfaz de consola con menús intuitivos y tablas visuales.</p>
 
-<p align="center"><strong>Haga click aqui un video explicativo sobre el codigo</strong> 
+<p align="center"><strong><a href="https://youtu.be/cRWHBtwMylU?feature=shared">Haga click aqui un video explicativo sobre el funcionamiento del codigo</a></strong> 
 
 <p align="center">¡Disfruta de nuestro programa de simulador de gastos!</p>
+ 
  

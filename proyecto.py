@@ -36,7 +36,7 @@ while(booleano):
         clase=clase.lower()
         info=str(input("- Descripcion(opcional): "))
         #aqui le preguntamos si quiere que la fecha se guarde de manea local con la hora de la pc o que el mismo usuario introduzca la hora qu deseas guardar el gastos
-        opcionHoractual=int(input("1. ¿Quieres que guardes la hora actual? o 2. ¿Quieres guardar la fecha manualmente?"))
+        opcionHoractual=int(input("1. ¿Quieres que guardes la Fecha actual? o 2. ¿Quieres guardar la fecha manualmente?"))
         if(opcionHoractual==1):
             x= str(date.today().strftime("%Y-%m-%d"))
             print("Fecha guardada con exito")
